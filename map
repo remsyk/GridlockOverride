@@ -45,10 +45,10 @@ class Cell { //creates a class which will generate 1 box, this will be called ma
         grid[i][j].display(true,#FF9933);      
    }
    
-   if (i==r+2 && j==r+2){
-      line(grid[i][j].x1,grid[i][j].y1, l,u);
+   if (i==r+2 && j==r+2){ //these 'if statements' just make it so that during certain cycles of the for loops in mapDraw, the boxes are drawn in specific section of the array
+      line(grid[i][j].x1,grid[i][j].y1, l,u); //this is where i am trying to draw the line
       pushMatrix();
-      translate(grid[i][j].x1,grid[i][j].y1);
+      translate(grid[i][j].x1,grid[i][j].y1); //i called this box to test to see if the locations from grid[][].x and y are correct and currently they are not
       box(10);
       popMatrix();
 
