@@ -8,26 +8,26 @@ float closeness;
 PVector boxe, cast,setCast;
 
 
-class Cell {
-  float x, y, z, d,x1,y1,z1;
+class Cell { //creates a class which will generate 1 box, this will be called many times to form the grid
+  float x, y, z, d,x1,y1,z1; 
 
 
-  Cell(float x, float y, float z, float d) {
-    this.x = x;
-    this.y = y;
+  Cell(float x, float y, float z, float d) { //constructor for when class is called
+    this.x = x; // x,y,z coordinate of box
+    this.y = y; 
     this.z = z;
-    this.d = d;
+    this.d = d; //depth of the box
   }
    
 
  void display(boolean k, int fill) {
-    pushMatrix();
-    translate(-width,-height);
-    translate(x,y,z);
-    collide(x,y,z,k);
-    fill(fill);
-    box(20, 20, d);
-     x1 = modelX(x,y,z);
+    pushMatrix();  //define shape inside of matrix so transformations do not effect other method items
+    translate(-width,-height); //move box to new location
+    translate(x,y,z); // move box to location specified when class is called
+    collide(x,y,z,k);  // controls collision of box with objects
+    fill(fill);  //sets color of box
+    box(20, 20, d); // calls box of specific size
+     x1 = modelX(x,y,z); // returns the x,y,z coordinates of of the box without any transformations so that the exact location of box is known
      y1 = modelY(x,y,z);
      z1 = modelZ(x,y,z);
     popMatrix();   
