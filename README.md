@@ -7,7 +7,7 @@ HOW TO RUN CODE:
 2. Download GridlockOverride from GiHhub
 3. Extracet Files from both links if required (most likely for processing)
 4. Run Processing Executable IDE 
-5. GoTo: File>Open>"game_3.pde"
+5. GoTo: File>Open>"GridlockOverride.pde"
 6. All the files should load without a problem
 7. click the run or play arrow button and sketch should load
 
