@@ -1,31 +1,27 @@
 Ship ship;
-float shipDir;
-float shipLocX;
-float shipLocY;
-float shipLocZ;
 int num = 40; 
 int[] x = new int[num];
 int[] y = new int[num];
-int indexPosition = 0;
-float grow = 0;
-float a = 0.0;
+int waterIndexPos = 0;
+float rippleSize = 0;
+float rippleVol = 0.0;
 boolean up, down, left, right,space;
 PVector shipLoc = new PVector(280,10000);
 boolean blink=false; //Release in Patch 1.1
 int blinkTime = second();
-//ArrayList bullets;
-//bullet bullet;
-float lookAt;
+//ArrayList bullets; Release in Patch 1.1
+//bullet bullet; Release in Patch 1.1
+//float lookAt; Release in Patch 1.1
 ArrayList<bull> bullets = new ArrayList<bull>(); //An array list of bullets
 
+//the ship really needs to be fixed but it works by taking several traingle planes and sticking them together
   class Ship {
 
-  void drawCone( int sides, float r1, float r2, float h, PVector loc, float rot){
+  void drawCone( int sides, float r1, float r2, float h, PVector loc){
     float angle = 360 / sides;
     float halfHeight = h/3;
     fill(#FF0303);
     translate(loc.x,loc.y, loc.z);    
-    rotate(radians(rot));
 
 
    pushMatrix();
@@ -68,6 +64,7 @@ void shipSetup(){
   ship = new Ship();
 }
 
+
 void keyPressed(){
   if(key == 'w'){
     up = true;
@@ -104,6 +101,7 @@ void keyReleased(){
     }
 }
 
+//this method reads user input and the moves the ship accordingly
 void shipMove(){
   if(up && right){
     //shipLoc.rotate(PI/4);
@@ -196,10 +194,12 @@ void shipMove(){
   */
  
 }
+//contrain is a build in method that creates boundaries
   shipLoc.x= constrain(shipLoc.x, -(boW*cols/4), (boW*cols));
   shipLoc.y= constrain(shipLoc.y, -(boH*rows/8), (boH*rows));
 }
 
+//handles bullets Release in patch 1.1
 class bull {
   float xPos = 0;
   float yPos = 0;
@@ -238,34 +238,34 @@ class bull {
   }
 }
 
-
+//this is the ripple effect you see behind the ship
 void water(){
-    x[indexPosition] = (int)shipLoc.x;
-    y[indexPosition] = (int)shipLoc.y;
-    indexPosition = (indexPosition + 1) % num;
+    x[waterIndexPos] = (int)shipLoc.x;
+    y[waterIndexPos] = (int)shipLoc.y;
+    waterIndexPos = (waterIndexPos + 1) % num;
     
     for (int i = 0; i<num; i++) {
     
-      int pos = (indexPosition +i) % num;
+      int pos = (waterIndexPos +i) % num;
       float radius = (num-i) /2.5;
       pushMatrix();
       stroke(255,30);
-      a+=0.002;
-      grow = cos(a)+10;
+      rippleVol+=0.002;
+      rippleSize = cos(rippleVol)+10;
       noFill();
       smooth();
-      ellipse(x[pos], y[pos], radius*3+grow, radius*3+grow);
-      ellipse(x[pos], y[pos], radius*2-10+grow, radius*2-10+grow);
+      ellipse(x[pos], y[pos], radius*3+rippleSize, radius*3+rippleSize);
+      ellipse(x[pos], y[pos], radius*2-10+rippleSize, radius*2-10+rippleSize);
       popMatrix();
-      if (grow>=40.0){
-          grow=0;
+      if (rippleSize>=40.0){
+          rippleSize=0;
       }
   }
 }
 
 
-
+//controls camera angle
 void trdCam () { 
     //change back to shiplocY+300, shiplocZ+800
-  camera(shipLoc.x, shipLoc.y+800, shipLoc.z+4000, shipLoc.x, shipLoc.y, shipLoc.z, 0, 1, 0);
+  camera(shipLoc.x, shipLoc.y+800, shipLoc.z+2000, shipLoc.x, shipLoc.y, shipLoc.z, 0, 1, 0);
 }
