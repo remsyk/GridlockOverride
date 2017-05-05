@@ -19,6 +19,9 @@ The objective of the game right now in Beta if to solve the semi maze and find t
 
 ACKNOLEDGEMENTS:
 https://www.openprocessing.org/user/31490
+
 https://www.openprocessing.org/user/41685
+
 https://www.openprocessing.org/user/11697
+
 https://www.openprocessing.org/user/17226
